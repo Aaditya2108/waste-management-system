@@ -1,15 +1,14 @@
-# app.py - Copy and paste this ENTIRE content
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
 
-# ===== Configuration (moved here to avoid import issues) =====
+# ===== Configuration =====
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 class Config:
     SECRET_KEY = 'dev-secret-key-change-in-production'
-    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASE_DIR, 'data', 'waste.db')}"
+    # FIX: Use 'instance' folder instead of 'data' for cloud deployment
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASE_DIR, 'instance', 'waste.db')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # ===== Database Models =====
@@ -98,6 +97,10 @@ app = create_app()
 
 # ===== Create database and sample data =====
 with app.app_context():
+    # CRITICAL: Create instance directory before database operations
+    instance_dir = os.path.join(BASE_DIR, 'instance')
+    os.makedirs(instance_dir, exist_ok=True)
+    
     db.create_all()
     if not CollectionSchedule.query.first():
         sample_data = [
