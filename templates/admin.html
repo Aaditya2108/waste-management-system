@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5>Total Reports</h5>
+                <h3>{{ total_reports }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5>Pending Reports</h5>
+                <h3>{{ pending_reports }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Recent Reports</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Address</th>
+            <th>Waste Type</th>
+            <th>Reported At</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+        <tr>
+            <td>{{ report.address }}</td>
+            <td>{{ report.waste_type }}</td>
+            <td>{{ report.reported_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td><span class="badge bg-{{ 'warning' if report.status == 'Pending' else 'success' }}">{{ report.status }}</span></td>
+            <td>
+                {% if report.status == 'Pending' %}
+                <a href="{{ url_for('admin.resolve_report', report_id=report.id) }}" class="btn btn-sm btn-success">Resolve</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

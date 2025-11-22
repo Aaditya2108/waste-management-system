@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Collection Schedule by Area</h2>
+
+{% for area, schedules in areas.items() %}
+    <div class="card mb-3">
+        <div class="card-header bg-success text-white">
+            <h4>{{ area }}</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Waste Type</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schedule in schedules %}
+                    <tr>
+                        <td>{{ schedule.day }}</td>
+                        <td><span class="badge bg-info">{{ schedule.waste_type }}</span></td>
+                        <td>{{ schedule.collection_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

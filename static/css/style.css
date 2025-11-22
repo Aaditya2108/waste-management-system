@@ -1,0 +1,18 @@
+.hero-section {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border-radius: 10px;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

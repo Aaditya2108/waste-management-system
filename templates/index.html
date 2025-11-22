@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section text-center py-5">
+    <h1 class="display-4 text-success">Smart Waste Management</h1>
+    <p class="lead">Track schedules and report missed collections easily</p>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">📅 View Schedule</h5>
+                <p>Check your area's waste collection schedule</p>
+                <a href="{{ url_for('main.schedule') }}" class="btn btn-success">View Schedule</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">🚨 Report Issue</h5>
+                <p>Report missed or improper waste collection</p>
+                <a href="{{ url_for('main.report') }}" class="btn btn-warning">Report Now</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">📊 Admin Panel</h5>
+                <p>Manage schedules and view reports</p>
+                <a href="{{ url_for('admin.login') }}" class="btn btn-primary">Admin Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
